@@ -43,32 +43,27 @@
       </button>
     </header>
 
-    <!-- Skeleton Loader -->
-    <div id="loading" class="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <!-- 4 ta skeleton card -->
-      <div class="bg-white p-4 rounded-xl shadow-md animate-pulse">
-        <div class="w-32 h-32 bg-gray-300 rounded-lg mx-auto mb-4"></div>
-        <div class="h-4 bg-gray-300 rounded w-3/4 mx-auto mb-2"></div>
-        <div class="h-3 bg-gray-300 rounded w-1/2 mx-auto mb-2"></div>
-        <div class="h-4 bg-gray-300 rounded w-2/3 mx-auto"></div>
+    <!-- Loading Skeleton -->
+    <div id="loading" class="grid grid-cols-2 md:grid-cols-4 gap-6 p-6">
+      <div class="animate-pulse space-y-4">
+        <div class="bg-gray-300 h-32 w-full rounded-lg"></div>
+        <div class="bg-gray-300 h-4 w-3/4 rounded"></div>
+        <div class="bg-gray-300 h-4 w-1/2 rounded"></div>
       </div>
-      <div class="bg-white p-4 rounded-xl shadow-md animate-pulse">
-        <div class="w-32 h-32 bg-gray-300 rounded-lg mx-auto mb-4"></div>
-        <div class="h-4 bg-gray-300 rounded w-3/4 mx-auto mb-2"></div>
-        <div class="h-3 bg-gray-300 rounded w-1/2 mx-auto mb-2"></div>
-        <div class="h-4 bg-gray-300 rounded w-2/3 mx-auto"></div>
+      <div class="animate-pulse space-y-4">
+        <div class="bg-gray-300 h-32 w-full rounded-lg"></div>
+        <div class="bg-gray-300 h-4 w-3/4 rounded"></div>
+        <div class="bg-gray-300 h-4 w-1/2 rounded"></div>
       </div>
-      <div class="bg-white p-4 rounded-xl shadow-md animate-pulse">
-        <div class="w-32 h-32 bg-gray-300 rounded-lg mx-auto mb-4"></div>
-        <div class="h-4 bg-gray-300 rounded w-3/4 mx-auto mb-2"></div>
-        <div class="h-3 bg-gray-300 rounded w-1/2 mx-auto mb-2"></div>
-        <div class="h-4 bg-gray-300 rounded w-2/3 mx-auto"></div>
+      <div class="animate-pulse space-y-4">
+        <div class="bg-gray-300 h-32 w-full rounded-lg"></div>
+        <div class="bg-gray-300 h-4 w-3/4 rounded"></div>
+        <div class="bg-gray-300 h-4 w-1/2 rounded"></div>
       </div>
-      <div class="bg-white p-4 rounded-xl shadow-md animate-pulse">
-        <div class="w-32 h-32 bg-gray-300 rounded-lg mx-auto mb-4"></div>
-        <div class="h-4 bg-gray-300 rounded w-3/4 mx-auto mb-2"></div>
-        <div class="h-3 bg-gray-300 rounded w-1/2 mx-auto mb-2"></div>
-        <div class="h-4 bg-gray-300 rounded w-2/3 mx-auto"></div>
+      <div class="animate-pulse space-y-4">
+        <div class="bg-gray-300 h-32 w-full rounded-lg"></div>
+        <div class="bg-gray-300 h-4 w-3/4 rounded"></div>
+        <div class="bg-gray-300 h-4 w-1/2 rounded"></div>
       </div>
     </div>
 
@@ -80,6 +75,38 @@
       ></div>
     </main>
 
+    <!-- Cart Modal -->
+    <div
+      id="cart-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50"
+    >
+      <div
+        class="bg-white w-96 max-h-[80vh] overflow-y-auto rounded-xl shadow-lg p-4"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-bold">🛒 Savatcha</h2>
+          <button
+            id="close-cart"
+            class="text-gray-500 hover:text-red-500 text-2xl"
+          >
+            &times;
+          </button>
+        </div>
+        <div id="cart-items" class="space-y-3">
+          <p class="text-gray-500">Savatcha bo'sh</p>
+        </div>
+        <div class="mt-4 flex justify-between items-center">
+          <span id="cart-total" class="font-semibold">Jami: 0 so'm</span>
+          <button
+            class="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700"
+          >
+            Buyurtma berish
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script -->
     <script src="js/script.js"></script>
   </body>
 </html>
