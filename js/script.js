@@ -1,21 +1,21 @@
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbz9VAb1L1MAKS3jL_Wh1arkzO2KlncmUANYmgbQjwy85c0UwuTBZfrOCQUn0ATM_skfHw/exec"
+const API_URL = "https://script.google.com/macros/s/AKfycbz9VAb1L1MAKS3jL_Wh1arkzO2KlncmUANYmgbQjwy85c0UwuTBZfrOCQUn0ATM_skfHw/exec";
 
-const loading = document.getElementById("loading")
-const productsContainer = document.getElementById("products")
-const cartCount = document.getElementById("cart-count")
-const searchInput = document.getElementById("search")
-let cart = 0
-let allProducts = []
+const loading = document.getElementById("loading");
+const productsContainer = document.getElementById("products");
+const cartCount = document.getElementById("cart-count");
+const searchInput = document.getElementById("search");
+let cart = 0;
+let allProducts = [];
 
+// Axios bilan ma'lumot olish
 async function fetchProducts() {
   try {
-    const res = await fetch(API_URL)
-    const data = await res.json()
-    console.log("Sheet Data:", data)
+    const res = await axios.get(API_URL);
+    const data = res.data;
+    console.log("Sheet Data:", data);
 
-    // Hide loading
-    loading.style.display = "none"
+    // Hide skeleton loader
+    loading.style.display = "none";
 
     // Store and render products
     allProducts = data.map((item) => ({
@@ -25,24 +25,24 @@ async function fetchProducts() {
       madein: item["🌍 Made in"] || "-",
       code: item["🔢 Kod"] || "-",
       image: item["📷 Rasm"] || "https://placehold.co/150x150?text=No+Image",
-    }))
+    }));
 
-    renderProducts(allProducts)
+    renderProducts(allProducts);
   } catch (error) {
     loading.innerHTML =
-      "<p class='text-red-500'>Xatolik yuz berdi! API ishlamadi.</p>"
-    console.error(error)
+      "<p class='text-red-500 col-span-4'>Xatolik yuz berdi! API ishlamadi.</p>";
+    console.error("API Error:", error);
   }
 }
 
-fetchProducts()
+fetchProducts();
 
 function renderProducts(list) {
-  productsContainer.innerHTML = ""
+  productsContainer.innerHTML = "";
   list.forEach((item) => {
-    const card = document.createElement("div")
+    const card = document.createElement("div");
     card.className =
-      "bg-white rounded-xl shadow-md p-4 flex flex-col items-center"
+      "bg-white rounded-xl shadow-md p-4 flex flex-col items-center";
 
     card.innerHTML = `
         <img src="${item.image}" alt="${item.name}" class="w-32 h-32 object-cover rounded-lg mb-4">
@@ -52,31 +52,31 @@ function renderProducts(list) {
         <p class="text-gray-400 text-sm">Made in: ${item.madein}</p>
         <p class="text-gray-400 text-sm">Kod: ${item.code}</p>
         <button class="mt-3 bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700">Add to Cart</button>
-      `
+      `;
 
     card.querySelector("button").addEventListener("click", () => {
-      cart++
-      cartCount.textContent = cart
-    })
+      cart++;
+      cartCount.textContent = cart;
+    });
 
-    productsContainer.appendChild(card)
-  })
+    productsContainer.appendChild(card);
+  });
 }
 
 // Live search with debounce
 const debounce = (fn, delay = 250) => {
-  let timer
+  let timer;
   return (...args) => {
-    clearTimeout(timer)
-    timer = setTimeout(() => fn.apply(null, args), delay)
-  }
-}
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(null, args), delay);
+  };
+};
 
 const handleSearch = () => {
-  const q = (searchInput?.value || "").toLowerCase().trim()
+  const q = (searchInput?.value || "").toLowerCase().trim();
   if (!q) {
-    renderProducts(allProducts)
-    return
+    renderProducts(allProducts);
+    return;
   }
   const filtered = allProducts.filter((p) => {
     return (
@@ -85,11 +85,11 @@ const handleSearch = () => {
       String(p.code).toLowerCase().includes(q) ||
       String(p.price).toLowerCase().includes(q) ||
       String(p.madein).toLowerCase().includes(q)
-    )
-  })
-  renderProducts(filtered)
-}
+    );
+  });
+  renderProducts(filtered);
+};
 
 if (searchInput) {
-  searchInput.addEventListener("input", debounce(handleSearch, 200))
+  searchInput.addEventListener("input", debounce(handleSearch, 200));
 }
