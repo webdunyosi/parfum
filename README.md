@@ -1,5 +1,7 @@
 # 🌸 L'Arôme Parfum — Premium Parfyumeriya Internet Do'koni
 
+🔗 **Jonli Demo (Live Demo)**: [parfum-2xvk.vercel.app](https://parfum-2xvk.vercel.app/)
+
 **L'Arôme Parfum** — bu Google Sheets (Google Jadvallari) ma'lumotlar bazasi asosida ishlaydigan, premium darajadagi, zamonaviy va hashamatli dizaynga ega bir sahifali (Single Page Application) parfyumeriya do'koni.
 
 Ushbu loyiha kichik va o'rta biznes egalari uchun backend (server) yaratmasdan, bevosita Google Sheets orqali tovarlar qoldig'i, narxlari va rasmlarini real vaqt rejimida boshqarish imkonini beradi.
