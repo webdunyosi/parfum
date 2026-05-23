@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" class="overflow-x-hidden w-full max-w-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>L'Arôme Parfum - Hashamat va Nafosat Ifori</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              luxury: {
+                bg: '#0B0B0C',
+                card: '#141417',
+                cardHover: '#1C1C21',
+                border: '#27272A',
+                gold: '#D4AF37',
+                goldLight: '#F3E5AB',
+                rose: '#E29578',
+                accent: '#F3C68F',
+                textMuted: '#9CA3AF'
+              }
+            },
+            fontFamily: {
+              serif: ['Playfair Display', 'serif'],
+              sans: ['Outfit', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    
+    <style>
+      /* Prevent horizontal scrolling strictly */
+      html, body {
+        overflow-x: hidden;
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      /* Custom scrollbar for premium touch */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0B0B0C;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #27272A;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #D4AF37;
+      }
+      
+      /* Hide scrollbar utility */
+      .scrollbar-none::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-none {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      
+      /* Glassmorphism utility */
+      .glass {
+        background: rgba(20, 20, 23, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      
+      /* Animated glows for luxury background */
+      .glow-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.15;
+        z-index: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body class="bg-luxury-bg text-gray-100 font-sans min-h-screen relative overflow-x-hidden w-full max-w-full">
+    
+    <!-- Background Luxury Glows Wrapped in Overflow-Hidden Container -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 min-h-full w-full max-w-full">
+      <div class="glow-orb w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] bg-luxury-gold top-[-100px] left-[-100px]"></div>
+      <div class="glow-orb w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-luxury-rose bottom-[-150px] right-[-150px]"></div>
+      <div class="glow-orb w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] bg-pink-900 top-[40%] left-[50%] -translate-x-1/2"></div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 glass border-b border-white/5 transition-all duration-300 w-full max-w-full">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 flex items-center justify-between gap-4">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-1.5 sm:gap-2 group">
+          <span class="text-xl sm:text-3xl text-luxury-gold transition-transform duration-500 group-hover:rotate-12">🌸</span>
+          <span class="font-serif text-lg sm:text-2xl font-bold tracking-widest bg-gradient-to-r from-luxury-gold via-white to-luxury-gold bg-clip-text text-transparent">
+            L'ARÔME
+          </span>
+        </a>
+
+        <!-- Live Search Container in Header (Hidden on Mobile) -->
+        <div class="flex-1 max-w-md hidden md:block">
+          <div class="relative">
+            <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">🔍</span>
+            <input
+              id="search"
+              type="text"
+              placeholder="Hashamatli iforlarni qidirish..."
+              class="w-full glass rounded-full py-2.5 pl-11 pr-5 text-sm text-gray-200 placeholder-gray-400 outline-none transition focus:border-luxury-gold/50 focus:ring-1 focus:ring-luxury-gold/30"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <!-- Cart Trigger -->
+        <div class="flex items-center gap-4">
+          <button 
+            id="cart-trigger"
+            class="relative p-2 sm:p-2.5 rounded-full glass hover:border-luxury-gold/30 hover:text-luxury-gold transition duration-300 group"
+          >
+            <span class="text-lg sm:text-2xl group-hover:scale-110 block transition duration-300">🛒</span>
+            <span
+              id="cart-count"
+              class="absolute -top-1 -right-1 bg-gradient-to-r from-luxury-gold to-luxury-accent text-luxury-bg text-[10px] sm:text-xs font-bold w-4.5 h-4.5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center animate-pulse"
+            >0</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Mobile Search Bar (Only visible on mobile below header) -->
+      <div class="px-4 pb-3 md:hidden">
+        <div class="relative">
+          <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">🔍</span>
+          <input
+            id="search-mobile"
+            type="text"
+            placeholder="Iforlarni qidiring..."
+            class="w-full glass rounded-full py-2 pl-11 pr-5 text-sm text-gray-200 placeholder-gray-400 outline-none transition focus:border-luxury-gold/50"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-8 sm:py-16 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full max-w-full">
+      <div class="text-center space-y-3 sm:space-y-4 max-w-3xl mx-auto">
+        <span class="text-luxury-gold text-[10px] sm:text-sm tracking-[0.25em] font-medium uppercase inline-block animate-fade-in">
+          Premium Parfyumeriya Kolleksiyasi
+        </span>
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-bold tracking-tight text-white leading-tight">
+          Tuyg'ularingiz <span class="italic font-light text-luxury-accent">Hashamatli</span> Ifori
+        </h1>
+        <p class="text-luxury-textMuted text-xs sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          Google Sheets orqali to'g'ridan-to'g'ri yangilanadigan va faqat original premium brendlar jamlangan eksklyuziv internet do'kon.
+        </p>
+        <div class="w-12 sm:w-16 h-[2px] bg-luxury-gold mx-auto mt-4 sm:mt-6"></div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative z-10 w-full max-w-full">
+      
+      <!-- Filter and Sort Bar -->
+      <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between glass p-4 rounded-2xl w-full">
+        <!-- Brand Chips Container (Seamless Horizontal Swipe on Mobile) -->
+        <div class="flex-1 min-w-0 w-full">
+          <p class="text-[10px] sm:text-xs uppercase text-luxury-gold tracking-widest mb-2 font-semibold">Brendlar bo'yicha saralash:</p>
+          <div 
+            id="brand-filters" 
+            class="flex overflow-x-auto gap-2 pb-1.5 scrollbar-none snap-x whitespace-nowrap -mx-4 px-4 sm:mx-0 sm:px-0"
+          >
+            <!-- Dynamically populated via JS -->
+            <button class="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase transition glass bg-luxury-gold text-luxury-bg border-luxury-gold">
+              Barchasi
+            </button>
+          </div>
+        </div>
+
+        <!-- Sort Dropdown -->
+        <div class="flex items-center gap-3 self-stretch lg:self-auto min-w-0 sm:min-w-[220px] w-full sm:w-auto">
+          <label for="sort-select" class="text-[10px] sm:text-xs uppercase text-luxury-gold tracking-widest font-semibold whitespace-nowrap">Saralash:</label>
+          <select 
+            id="sort-select" 
+            class="w-full glass rounded-lg py-2 px-3 text-xs text-gray-200 outline-none cursor-pointer border border-white/5 focus:border-luxury-gold/50"
+          >
+            <option value="default">Odatiy (Jadval tartibi)</option>
+            <option value="price-asc">Narxi: Arzonidan qimmatiga</option>
+            <option value="price-desc">Narxi: Qimmatidan arzoniga</option>
+            <option value="name-asc">Nomi: A - Z</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Loading Skeleton Grid (2 Columns on Mobile) -->
+      <div id="loading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-8 w-full">
+        <!-- Skeleton Card 1 -->
+        <div class="glass rounded-xl sm:rounded-2xl p-3 sm:p-5 space-y-3 sm:space-y-4 animate-pulse">
+          <div class="bg-zinc-800/50 aspect-square w-full rounded-lg sm:rounded-xl"></div>
+          <div class="space-y-2">
+            <div class="bg-zinc-800/50 h-3 sm:h-4 w-1/3 rounded"></div>
+            <div class="bg-zinc-800/50 h-4 sm:h-5 w-3/4 rounded"></div>
+            <div class="bg-zinc-800/50 h-3 sm:h-4 w-1/2 rounded"></div>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2 pt-2 border-t border-white/5">
+            <div class="bg-zinc-800/50 h-5 w-1/2 rounded"></div>
+            <div class="bg-zinc-800/50 h-8 w-full sm:w-20 rounded-lg"></div>
+          </div>
+        </div>
+        <!-- Skeleton Card 2 -->
+        <div class="glass rounded-xl sm:rounded-2xl p-3 sm:p-5 space-y-3 sm:space-y-4 animate-pulse">
+          <div class="bg-zinc-800/50 aspect-square w-full rounded-lg sm:rounded-xl"></div>
+          <div class="space-y-2">
+            <div class="bg-zinc-800/50 h-3 sm:h-4 w-1/3 rounded"></div>
+            <div class="bg-zinc-800/50 h-4 sm:h-5 w-3/4 rounded"></div>
+            <div class="bg-zinc-800/50 h-3 sm:h-4 w-1/2 rounded"></div>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2 pt-2 border-t border-white/5">
+            <div class="bg-zinc-800/50 h-5 w-1/2 rounded"></div>
+            <div class="bg-zinc-800/50 h-8 w-full sm:w-20 rounded-lg"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid (2 Columns on Mobile for premium look) -->
+      <div
+        id="products"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-8 w-full"
+      ></div>
+    </main>
+
+    <!-- Cart Slide-Over Panel -->
+    <div
+      id="cart-sidebar"
+      class="fixed inset-0 z-50 overflow-hidden hidden"
+      role="dialog"
+      aria-modal="true"
+    >
+      <!-- Backdrop overlay -->
+      <div 
+        id="cart-overlay"
+        class="absolute inset-0 bg-black/75 backdrop-blur-sm transition-opacity duration-500 opacity-0"
+      ></div>
+
+      <div class="fixed inset-y-0 right-0 flex max-w-full pl-4 sm:pl-10">
+        <!-- Sliding Panel content -->
+        <div
+          id="cart-panel"
+          class="w-screen max-w-md transform transition-transform duration-500 ease-in-out translate-x-full glass flex flex-col h-full shadow-2xl border-l border-white/5"
+        >
+          <!-- Cart Header -->
+          <div class="px-4 py-4 sm:px-6 sm:py-5 border-b border-white/5 flex items-center justify-between">
+            <h2 class="text-lg sm:text-xl font-serif font-bold tracking-wider text-white flex items-center gap-2">
+              <span>🛒</span> Savatcha
+            </h2>
+            <button
+              id="close-cart"
+              class="p-1.5 rounded-full hover:bg-white/5 text-gray-400 hover:text-luxury-gold transition duration-300 text-2xl outline-none"
+            >
+              &times;
+            </button>
+          </div>
+
+          <!-- Cart Items Container -->
+          <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4" id="cart-items-container">
+            <div id="cart-items" class="space-y-4">
+              <!-- Empty state default -->
+              <div class="text-center py-12 space-y-3">
+                <span class="text-5xl block grayscale opacity-40">🛍️</span>
+                <p class="text-luxury-textMuted text-sm">Savatchangiz hozircha bo'sh</p>
+              </div>
+            </div>
+            
+            <!-- Checkout Form Section (Initially Hidden) -->
+            <div id="checkout-section" class="hidden border-t border-white/5 pt-6 mt-6 space-y-4">
+              <h3 class="font-serif font-bold text-base sm:text-lg text-luxury-gold border-b border-white/5 pb-2">📦 Buyurtma rasmiylashtirish</h3>
+              <form id="checkout-form" class="space-y-3.5">
+                <div>
+                  <label for="client-name" class="block text-[10px] uppercase text-luxury-textMuted tracking-wider mb-1">Ismingiz *</label>
+                  <input 
+                    type="text" 
+                    id="client-name" 
+                    required 
+                    placeholder="Masalan: Alimardon"
+                    class="w-full glass rounded-lg py-2 px-3 text-sm text-gray-200 outline-none border border-white/5 focus:border-luxury-gold/50 focus:ring-1 focus:ring-luxury-gold/30"
+                  >
+                </div>
+                <div>
+                  <label for="client-phone" class="block text-[10px] uppercase text-luxury-textMuted tracking-wider mb-1">Telefon raqamingiz *</label>
+                  <input 
+                    type="tel" 
+                    id="client-phone" 
+                    required 
+                    placeholder="Masalan: +998 90 123 45 67"
+                    class="w-full glass rounded-lg py-2 px-3 text-sm text-gray-200 outline-none border border-white/5 focus:border-luxury-gold/50 focus:ring-1 focus:ring-luxury-gold/30"
+                  >
+                </div>
+                <div>
+                  <label for="client-address" class="block text-[10px] uppercase text-luxury-textMuted tracking-wider mb-1">Yetkazib berish manzili *</label>
+                  <textarea 
+                    id="client-address" 
+                    required 
+                    rows="2"
+                    placeholder="Viloyat, tuman, mahalla, ko'cha, uy raqami..."
+                    class="w-full glass rounded-lg py-2 px-3 text-sm text-gray-200 outline-none border border-white/5 focus:border-luxury-gold/50 focus:ring-1 focus:ring-luxury-gold/30 resize-none"
+                  ></textarea>
+                </div>
+                <div class="pt-2 flex gap-3">
+                  <button 
+                    type="button" 
+                    id="back-to-cart"
+                    class="flex-1 py-2.5 rounded-lg border border-white/10 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-white hover:bg-white/5 transition duration-300"
+                  >
+                    Orqaga
+                  </button>
+                  <button 
+                    type="submit" 
+                    class="flex-1 py-2.5 rounded-lg bg-gradient-to-r from-luxury-gold to-luxury-accent hover:from-luxury-goldHover hover:to-luxury-gold text-luxury-bg font-bold text-xs uppercase tracking-widest shadow-lg shadow-luxury-gold/10 transition duration-300"
+                  >
+                    Tasdiqlash
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Cart Footer -->
+          <div id="cart-footer" class="px-4 py-4 sm:px-6 sm:py-5 border-t border-white/5 bg-luxury-bg/50 backdrop-blur-md">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs sm:text-sm text-luxury-textMuted uppercase tracking-wider">Umumiy Summa</span>
+              <span id="cart-total" class="text-lg sm:text-xl font-bold text-luxury-gold font-serif">0 so'm</span>
+            </div>
+            
+            <button
+              id="checkout-trigger"
+              disabled
+              class="w-full py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-luxury-gold to-luxury-accent hover:from-luxury-goldHover hover:to-luxury-gold disabled:from-zinc-800 disabled:to-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-luxury-bg font-bold text-xs uppercase tracking-widest shadow-lg transition duration-300 block text-center"
+            >
+              Buyurtma berish
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Success Overlay Modal -->
+    <div
+      id="success-modal"
+      class="fixed inset-0 bg-black/85 backdrop-blur-md hidden justify-center items-center z-50 p-4"
+    >
+      <div class="glass max-w-md w-full rounded-2xl p-6 sm:p-8 text-center space-y-5 sm:space-y-6 border border-luxury-gold/20 relative overflow-hidden">
+        <!-- Sparkle decorative animations -->
+        <div class="absolute -top-10 -left-10 w-24 h-24 bg-luxury-gold/20 rounded-full blur-xl"></div>
+        <div class="absolute -bottom-10 -right-10 w-24 h-24 bg-luxury-rose/20 rounded-full blur-xl"></div>
+
+        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-luxury-gold to-luxury-accent rounded-full flex items-center justify-center mx-auto text-luxury-bg text-3xl sm:text-4xl shadow-lg shadow-luxury-gold/20 scale-100">
+          ✓
+        </div>
+        
+        <div class="space-y-2">
+          <h2 class="text-xl sm:text-2xl font-serif font-bold text-white tracking-wide">Buyurtmangiz Qabul Qilindi!</h2>
+          <p class="text-luxury-gold text-xs sm:text-sm font-serif">Siz bilan tez orada bog'lanamiz.</p>
+        </div>
+        
+        <p class="text-luxury-textMuted text-[11px] sm:text-xs leading-relaxed max-w-sm mx-auto">
+          Xaridingiz uchun tashakkur! Bizning operatorlarimiz siz ko'rsatgan telefon raqami orqali tez orada bog'lanib, yetkazib berish tafsilotlarini tasdiqlashadi.
+        </p>
+
+        <button
+          id="close-success"
+          class="w-full py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-widest transition duration-300 border border-white/5"
+        >
+          Do'konga qaytish
+        </button>
+      </div>
+    </div>
+
+    <!-- Script -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
